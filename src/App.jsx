@@ -1,66 +1,75 @@
 import { useState, useEffect } from "react";
 import "./app.css";
-export default function App() {
-  const [cookies, setCookies] = useState(0);
 
-  const [cookiesPerSec, setCookiesPerSec] = useState(1);
+
+export default function App() {
+  const [seeds, setSeeds] = useState(0);
+
+  const [seedsPerSec, setSeedsPerSec] = useState(1);
 
   useEffect(() => {
     // a timer to be created when the page loads to increase cookies by cps every second
     const myInterval = setInterval(() => {
-      increaseCookiesByOne();
-    }, 1000 / cookiesPerSec);
+      upgrade();
+    }, 1000 / seedsPerSec);
 
     // function to clean up my timer when I rerun the useEffect
     return () => {
       clearInterval(myInterval);
     };
-  }, [cookiesPerSec]);
+  }, [seedsPerSec]);
 
-  function increaseCookiesByOne() {
-    console.log("cookie clicker clicked!");
-    setCookies((currentCookies) => {
-      return currentCookies + 1;
+  function upgrade() {
+    
+    setSeeds((currentSeeds) => {
+      return currentSeeds + 1;
     });
   }
 
-  function buyUpgrade() {
-    setCookiesPerSec(cookiesPerSec + 1);
-  }
-
-  function tenCookies() {
-    setCookiesPerSec(cookiesPerSec + 10);
-    setCookies((currentCookies) => {
-      return currentCookies - 10;
+  function oneSeeds() {
+    setSeedsPerSec(seedsPerSec + 1);
+    setSeeds((currentSeeds) => {
+      return currentSeeds - 1;
     });
   }
 
-  function hundredCookies() {
-    setCookiesPerSec(cookiesPerSec + 100);
-    setCookies((currentCookies) => {
-      return currentCookies - 100;
-    });
-  }
-  function thousandCookies() {
-    setCookiesPerSec(cookiesPerSec + 1000);
-    setCookies((currentCookies) => {
-      return currentCookies - 1000;
+  // function buyUpgrade() {
+  //   setCookiesPerSec(cookiesPerSec + 1);
+  // }
+  function fiveSeeds() {
+    setSeedsPerSec(seedsPerSec + 5);
+    setSeeds((currentSeeds) => {
+      return currentSeeds - 5;
     });
   }
 
+  function tenSeeds() {
+    setSeedsPerSec(seedsPerSec + 10);
+    setSeeds((currentSeeds) => {
+      return currentSeeds - 10;
+    });
+  }
+
+  // function thousandCookies() {
+  //   setCookiesPerSec(cookiesPerSec + 1000);
+  //   setCookies((currentCookies) => {
+  //     return currentCookies - 1000;
+  //   });
+  // }
   return (
     <div id="container">
-      <h1>Cookie Clicker</h1>
-      <button onClick={increaseCookiesByOne}>I am a cookie...</button>
+      <h1>Seed Sower</h1>
+      <img className="shake" onClick={oneSeeds}src="./src/seed-packet.png" alt="seed packet" />
+      <button onClick={oneSeeds}>Get +1 seeds per second!</button>
       {/* <button onClick={buyUpgrade}>Get +1 cookies per second!</button> */}
-      <button onClick={tenCookies}>Get +10 cookies per second!</button>
-      <button onClick={hundredCookies}>Get +100 cookies per second!</button>
-      <button onClick={thousandCookies}>Get +1000 cookies per second!</button>
+      <button onClick={fiveSeeds}>Get +5 seeds per second!</button>
+      <button onClick={tenSeeds}>Get +10 seeds per second!</button>
+      {/* <button onClick={thousandCookies}>Get +1000 cookies per second!</button> */}
 
       {/* image onclick... */}
       {/* <img onClick={}  src="" alt="" />  */}
-      <p>I have {cookies} cookies.</p>
-      <p>Collecting {cookiesPerSec} cookies per second.</p>
+      <p>I have {seeds} seeds.</p>
+      <p>Collecting {seedsPerSec} seeds per second.</p>
     </div>
   );
 }
