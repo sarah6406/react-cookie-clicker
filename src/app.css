@@ -2,7 +2,7 @@ body {
     font-family: monospace;
     background-color: tomato;
 }
-#container {
+/* #container {
     display: flex;
     flex-direction: column;
     border: 2px solid black;
@@ -11,7 +11,8 @@ body {
     width: 20rem;
     align-items: center;
     background-color: beige;
-}
+    margin: auto;
+} */
 
 button {
     width: 10rem;
@@ -24,13 +25,13 @@ img {
     width: 15rem;
 
     &:active {
-        animation: vibrate 0.1s infinite;
+        animation: vibrate 0.05s infinite;
       }
 }
 
 @keyframes vibrate {
-    50% { transform: rotate(1deg) translateX(1px); }
-    100% { transform: rotate(-1deg) translateX(-1px); }
+    50% { transform: rotate(1deg) translateX(3px); }
+    100% { transform: rotate(-1deg) translateX(-3px); }
   }
 /* .shake {
     animation: shake 0.5s;
