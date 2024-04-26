@@ -31,7 +31,7 @@ export default function Container() {
         return currentSeeds - cost;
       });
     } else {
-      alert("you do not have enough seeds!");
+      alert("You do not have enough seeds!");
     }
   }
 
@@ -46,6 +46,9 @@ export default function Container() {
       />
 
       {/* THIS IS WORKING CODE DO NOT DELETE*/}
+      
+      <p>You have {seeds} seeds.</p>
+      <p>Collecting {seedsPerSec} seeds per second.</p>
       {Upgrades.map((item) => {
         return (
           <button
@@ -60,8 +63,7 @@ export default function Container() {
 
       {/* <Button /> */}
       <br />
-      <p>You have {seeds} seeds.</p>
-      <p>Collecting {seedsPerSec} seeds per second.</p>
+      
 
       <br />
       <br />
