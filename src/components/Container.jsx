@@ -1,94 +1,61 @@
 import { useState, useEffect } from "react";
 import "./container.css";
-import { Upgrades } from "./Upgrades";
-import UpgradesArray from "./UpgradesArray";
+import Button from "./Button.jsx";
+import { Upgrades } from "./Upgrades.js";
 
 export default function Container() {
   const [seeds, setSeeds] = useState(0);
   const [seedsPerSec, setSeedsPerSec] = useState(1);
 
   useEffect(() => {
-    // a timer to be created when the page loads to increase cookies by cps every second
-    const myInterval = setInterval(() => {
-      upgrade();
-    }, 1000 / seedsPerSec);
-
-    // function to clean up my timer when I rerun the useEffect
+    // a timer to be created when the page loads to increase seeds by seedsPerSec every second
+    const interval = setInterval(() => {
+      addOneSeed();
+    }, 1000 / seedsPerSec); // why am i dividing by seedsPerSec?
+    // optional function to clean up my timer when I rerun the useEffect????
     return () => {
-      clearInterval(myInterval);
+      clearInterval(interval);
     };
-  }, [seedsPerSec]);
+  }, [seedsPerSec]); // tells useEffect what it should be listening to in order to run the code (am I understanding that right? why is console.log causing an error?)
 
-  function upgrade() {
+  function addOneSeed() {
     setSeeds((currentSeeds) => {
       return currentSeeds + 1;
     });
   }
-
-  function upgradeItems() {
-    return (
-      <div>
-        {Upgrades.map((item) => {
-          return (
-            <button key={item.id} id="upgradeButton">
-              Upgrade {item.name}: get {item.increment} seeds per second!
-            </button>
-          );
-        })}
-      </div>
-    );
-  }
-  
-
-  function oneSeed() {
-    setSeedsPerSec(seedsPerSec + 1);
+  //generic function for all upgrades
+  function buyUpgrade(cost, increment) {
+    setSeedsPerSec(seedsPerSec + increment);
     setSeeds((currentSeeds) => {
-      return currentSeeds - 1;
-    });
-    // buyUpgrade();
-  }
-
-//   function buyUpgrade({Upgrades}) {
-//     setSeedsPerSec(seedsPerSec + {cost});
-//   }
-
-
-
-  function fiveSeeds() {
-    setSeedsPerSec(seedsPerSec + 5);
-    setSeeds((currentSeeds) => {
-      return currentSeeds - 5;
+      return currentSeeds - cost;
     });
   }
 
-  function tenSeeds() {
-    setSeedsPerSec(seedsPerSec + 10);
-    setSeeds((currentSeeds) => {
-      return currentSeeds - 10;
-    });
-  }
   return (
     <div id="container">
       <h1>Seed Sower</h1>
       <img
         className="shake"
-        onClick={oneSeed}
+        onClick={addOneSeed}
         src="./src/seed-packet.png"
         alt="seed packet"
       />
-      <button onClick={upgradeItems}>Get +1 seeds per second!</button>
-      {/* <button onClick={buyUpgrade}>Get +1 cookies per second!</button> */}
-      <button onClick={fiveSeeds}>Get +5 seeds per second!</button>
-      <button onClick={tenSeeds}>Get +10 seeds per second!</button>
-      {/* <UpgradesArray /> */}
 
-      {/* <button onClick={thousandCookies}>Get +1000 cookies per second!</button> */}
+      {/* THIS IS WORKING CODE DO NOT DELETE*/}
+      {/* {Upgrades.map((item) => {
+    return (
+      <button onClick={() => buyUpgrade(item.cost, item.increment)} key={item.id} id="upgradeButton">
+        Upgrade {item.name}: get {item.increment} seeds per second!
+      </button>
+    );
+  })} */}
+      <button onClick={() => buyUpgrade(1, 1)}>Get +1 seeds!</button>
 
-      {/* image onclick... */}
-      {/* <img onClick={}  src="" alt="" />  */}
+      <Button />
+
       <p>You have {seeds} seeds.</p>
       <p>Collecting {seedsPerSec} seeds per second.</p>
-      <UpgradesArray />
+
       <br />
       <br />
       <br />
@@ -96,4 +63,3 @@ export default function Container() {
     </div>
   );
 }
-
