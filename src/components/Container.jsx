@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./container.css";
-import Button from "./Button.jsx";
+// import Button from "./Button.jsx";
 import { Upgrades } from "./Upgrades.js";
 
 export default function Container() {
@@ -25,10 +25,14 @@ export default function Container() {
   }
   //generic function for all upgrades
   function buyUpgrade(cost, increment) {
-    setSeedsPerSec(seedsPerSec + increment);
-    setSeeds((currentSeeds) => {
-      return currentSeeds - cost;
-    });
+    if (cost <= seeds) {
+      setSeedsPerSec(seedsPerSec + increment);
+      setSeeds((currentSeeds) => {
+        return currentSeeds - cost;
+      });
+    } else {
+      alert("you do not have enough seeds!");
+    }
   }
 
   return (
@@ -37,22 +41,25 @@ export default function Container() {
       <img
         className="shake"
         onClick={addOneSeed}
-        src="./src/seed-packet.png"
+        src="/seed-packet.png"
         alt="seed packet"
       />
 
       {/* THIS IS WORKING CODE DO NOT DELETE*/}
-      {/* {Upgrades.map((item) => {
-    return (
-      <button onClick={() => buyUpgrade(item.cost, item.increment)} key={item.id} id="upgradeButton">
-        Upgrade {item.name}: get {item.increment} seeds per second!
-      </button>
-    );
-  })} */}
-      <button onClick={() => buyUpgrade(1, 1)}>Get +1 seeds!</button>
+      {Upgrades.map((item) => {
+        return (
+          <button
+            onClick={() => buyUpgrade(item.cost, item.increment)}
+            key={item.id}
+            id="upgradeButton"
+          >
+            Upgrade: <strong>{item.name}</strong><br/> Cost: {item.cost} - get +{item.increment} seeds per second!
+          </button>
+        );
+      })}
 
-      <Button />
-
+      {/* <Button /> */}
+      <br />
       <p>You have {seeds} seeds.</p>
       <p>Collecting {seedsPerSec} seeds per second.</p>
 
