@@ -38,6 +38,10 @@ export default function Container() {
   return (
     <div id="container">
       <h1>Seed Sower</h1>
+      <h4>
+        <em>Tap the packet!</em>
+      </h4>
+
       <img
         className="shake"
         onClick={addOneSeed}
@@ -46,7 +50,7 @@ export default function Container() {
       />
 
       {/* THIS IS WORKING CODE DO NOT DELETE*/}
-      
+
       <p>You have {seeds} seeds.</p>
       <p>Collecting {seedsPerSec} seeds per second.</p>
       {Upgrades.map((item) => {
@@ -56,14 +60,14 @@ export default function Container() {
             key={item.id}
             id="upgradeButton"
           >
-            Upgrade: <strong>{item.name}</strong><br/> Cost: {item.cost} - get +{item.increment} seeds per second!
+            Upgrade: <strong>{item.name}</strong>
+            <br /> Cost: {item.cost} - get +{item.increment} seeds per second!
           </button>
         );
       })}
 
       {/* <Button /> */}
       <br />
-      
 
       <br />
       <br />
