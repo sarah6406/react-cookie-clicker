@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./container.css";
-// import Button from "./Button.jsx";
-import { Upgrades } from "./Upgrades.js";
+import Buttons from "./Buttons.jsx";
+
 
 export default function Container() {
   const [seeds, setSeeds] = useState(0);
@@ -53,25 +53,10 @@ export default function Container() {
 
       <p>You have {seeds} seeds.</p>
       <p>Collecting {seedsPerSec} seeds per second.</p>
-      {Upgrades.map((item) => {
-        return (
-          <button
-            onClick={() => buyUpgrade(item.cost, item.increment)}
-            key={item.id}
-            id="upgradeButton"
-          >
-            Upgrade: <strong>{item.name}</strong>
-            <br /> Cost: {item.cost} - get +{item.increment} seeds per second!
-          </button>
-        );
-      })}
+      
 
-      {/* <Button /> */}
-      <br />
-
-      <br />
-      <br />
-      <br />
+      <Buttons buyUpgrade={buyUpgrade}/>
+      
       <p>Lovingly made... </p>
     </div>
   );
