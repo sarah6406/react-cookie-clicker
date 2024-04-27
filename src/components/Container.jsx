@@ -9,6 +9,8 @@ export default function Container() {
     // parseInt(localStorage.getItem("seedsPerSec") || 1)
   );
 
+//leaving this function here so I can play around further with local storage - works on localhost but throws an error (NaN appears) on vercel
+
   // useEffect dependency to store seeds and seedsPerSec within local storage so values persist even on page refresh...
   // useEffect(() => {
   //   localStorage.setItem("seeds", seeds.toString());
