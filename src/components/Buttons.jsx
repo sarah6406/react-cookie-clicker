@@ -1,6 +1,5 @@
 import {Upgrades} from "./Upgrades";
 
-
 export default function Buttons({buyUpgrade}) {
     return (
         <>

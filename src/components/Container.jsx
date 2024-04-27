@@ -2,10 +2,18 @@ import { useState, useEffect } from "react";
 import "./container.css";
 import Buttons from "./Buttons.jsx";
 
-
 export default function Container() {
-  const [seeds, setSeeds] = useState(0);
-  const [seedsPerSec, setSeedsPerSec] = useState(1);
+  const [seeds, setSeeds] = useState(parseInt(localStorage.getItem("seeds")));
+  const [seedsPerSec, setSeedsPerSec] = useState(
+    parseInt(localStorage.getItem("seedsPerSec"))
+  );
+
+  // useEffect dependency to store seeds and seedsPerSec within local storage so values persist even on page refresh...
+  useEffect(() => {
+    localStorage.setItem("seeds", seeds.toString());
+    localStorage.setItem("seedsPerSec", seedsPerSec.toString());
+    console.log(localStorage);
+  }, [seeds, seedsPerSec]);
 
   useEffect(() => {
     // a timer to be created when the page loads to increase seeds by seedsPerSec every second
@@ -16,7 +24,7 @@ export default function Container() {
     return () => {
       clearInterval(interval);
     };
-  }, [seedsPerSec]); // tells useEffect what it should be listening to in order to run the code (am I understanding that right? why is console.log causing an error?)
+  }, [seedsPerSec]); // tells useEffect what it should be listening to in order to run the code (am I understanding that right? )
 
   function addOneSeed() {
     setSeeds((currentSeeds) => {
@@ -38,9 +46,9 @@ export default function Container() {
   return (
     <div id="container">
       <h1>Seed Sower</h1>
-      <h4>
+      <p>
         <em>Tap the packet!</em>
-      </h4>
+      </p>
 
       <img
         className="shake"
@@ -49,14 +57,11 @@ export default function Container() {
         alt="seed packet"
       />
 
-      {/* THIS IS WORKING CODE DO NOT DELETE*/}
-
       <p>You have {seeds} seeds.</p>
       <p>Collecting {seedsPerSec} seeds per second.</p>
-      
 
-      <Buttons buyUpgrade={buyUpgrade}/>
-      
+      <Buttons buyUpgrade={buyUpgrade} />
+
       <p>Lovingly made... </p>
     </div>
   );
