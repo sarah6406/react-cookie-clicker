@@ -3,17 +3,18 @@ import "./container.css";
 import Buttons from "./Buttons.jsx";
 
 export default function Container() {
-  const [seeds, setSeeds] = useState(parseInt(localStorage.getItem("seeds")));
-  const [seedsPerSec, setSeedsPerSec] = useState(
-    parseInt(localStorage.getItem("seedsPerSec"))
+  const [seeds, setSeeds] = useState(0)
+    // parseInt(localStorage.getItem("seeds")) || 0);
+  const [seedsPerSec, setSeedsPerSec] = useState(1
+    // parseInt(localStorage.getItem("seedsPerSec") || 1)
   );
 
   // useEffect dependency to store seeds and seedsPerSec within local storage so values persist even on page refresh...
-  useEffect(() => {
-    localStorage.setItem("seeds", seeds.toString());
-    localStorage.setItem("seedsPerSec", seedsPerSec.toString());
-    console.log(localStorage);
-  }, [seeds, seedsPerSec]);
+  // useEffect(() => {
+  //   localStorage.setItem("seeds", seeds.toString());
+  //   localStorage.setItem("seedsPerSec", seedsPerSec.toString());
+  //   console.log(localStorage);
+  // }, [seeds, seedsPerSec]);
 
   useEffect(() => {
     // a timer to be created when the page loads to increase seeds by seedsPerSec every second
